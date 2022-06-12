@@ -65,7 +65,7 @@ function buildCharts(sample) {
     var result = resultArray[0];
     // 6. Create variables that hold the otu_ids, otu_labels, and sample_values.
     var otuIds = result.otu_ids;
-    var otuLables = result.otu_labels;
+    var otuLabels = result.otu_labels;
     var sampleValues = result.sample_values;
  
     // 7. Create the yticks for the bar chart.
@@ -79,7 +79,7 @@ function buildCharts(sample) {
 
       x: sampleValues.slice(0, 10).reverse(),
       y: yticks,
-      text: otuLables.slice(0, 10).reverse(),
+      text: otuLabels.slice(0, 10).reverse(),
       type: "bar",
       orientation: 'h'
       
@@ -91,5 +91,29 @@ function buildCharts(sample) {
     };
     // 10. Use Plotly to plot the data with the layout. 
     Plotly.newPlot("bar", barData, barLayout)
+
+    // 1. Create the trace for the bubble chart.
+    var bubbleData = [
+      x: otuIds,
+      y: SampleValues,
+      text: otuLabels
+      mode:"markers",
+      marker: {
+        color: otuIds, 
+        size: sampleValues}
+    ];
+
+    // 2. Create the layout for the bubble chart.
+    var bubbleLayout = {
+      title: 'Belly Button Biodiversity Dashboard',
+      xaxis: 'OTU ID',
+      hovermode: 'closest'
+    };
+
+    // 3. Use Plotly to plot the data with the layout.
+    Plotly.newPlot(); 
   });
+
+    
 }
+
